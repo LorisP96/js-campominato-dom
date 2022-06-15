@@ -6,13 +6,26 @@
 
 img {
     width: 50px;
-    margin: 0 auto;
+    margin: 0 30px;
 }
 
 header {
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 100px;
+}
+
+header:first-child > div {
+    display: flex;
+    align-items: center;
+}
+
+select, button {
+    height: 40px;
+    width: 150px;
+    font-size: 30px;
 }
 
 main {
@@ -63,4 +76,9 @@ main {
 
 .notclick {
     pointer-events: none;
+}
+
+.message {
+    text-align: center;
+    font-size: 30px;
 }

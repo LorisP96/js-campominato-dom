@@ -28,6 +28,8 @@ let newSquare;
 
 let newClass;
 
+const userMessage = document.querySelector('.message')
+
 // quando clicco play genero square
 playBtn.addEventListener("click", gameMode);
 
@@ -56,7 +58,7 @@ function gameMode() {
     }
 
     // genero numeri random
-    nades = nadesGenerator(nNumbers, nades);
+    nades = nadesGenerator(nNumbers);
     console.log(nades)
 
     // aggiungo la classe per specificare le dimensioni 
@@ -72,7 +74,6 @@ function gameMode() {
     }
 }
 
-
 function squareClick() {
     let userNumber = parseInt(this.querySelector('span').innerHTML);
     console.log(userNumber)
@@ -83,8 +84,12 @@ function squareClick() {
     // se è incluso tra le bombe hai perso
     if (nades.includes(userNumber)) {
 
+        // seleziono tutti gli user number che corrispondono a nades
+        
         this.classList.add('red');
+        nades.includes(userNumber)
         contNum.classList.add('notclick');
+        userMessage.innerHTML = `Hai perso, il tuo punteggio è ${userArray.length}`
         
         // e se non è inserito tra le bombe lo inserisco nell'array del giocatore, sempre se non è già stato inserito
     } else if (!nades.includes(userNumber) && !userArray.includes(userNumber)) {
@@ -94,20 +99,21 @@ function squareClick() {
         
         // e se ho raggiunto il numero massimo di tentativi ho vinto
         if (userArray.length === numTry) {
-            alert('Hai vinto!');
+            userMessage.innerHTML = 'Hai vinto, ma a quale prezzo?';
+            contNum.classList.add('notclick');
         }
     }
-
     console.log(userArray)
 }
 
 //////////// funzioni //////////////////////////////////////////////
-function nadesGenerator(number, Array) {
-    while (Array.length !== 16) {
+function nadesGenerator(number) {
+    const test = [];
+    while (test.length !== 16) {
         let randomNum = Math.floor(Math.random() * number) + 1;
-        if (!Array.includes(randomNum)) {
-        Array.push(randomNum);
+        if (!test.includes(randomNum)) {
+        test.push(randomNum);
        }
     }
-    return Array;
+    return test;
 }
