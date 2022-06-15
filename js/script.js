@@ -1,14 +1,3 @@
-// In seguito l'utente clicca su una cella: se il numero è presente 
-// nella lista dei numeri generati - abbiamo calpestato una bomba - 
-// la cella si colora di rosso e la partita termina, 
-// altrimenti la cella cliccata si colora di azzurro e 
-// l'utente può continuare a cliccare sulle altre celle.
-// La partita termina quando il giocatore clicca su una bomba
-//  o raggiunge il numero massimo possibile di numeri consentiti.
-// Al termine della partita il software deve comunicare il punteggio, 
-// cioè il numero di volte che l’utente 
-// ha cliccato su una cella che non era una bomba.
-
 const contNum = document.getElementById('container');
 
 
@@ -22,12 +11,16 @@ let nNumbers;
 // array dove andranno le bombe generate casualmente
 let nades = [];
 
+// array di ogni elemento cliccato
 let userArray = [];
 
+// caselle
 let newSquare;
 
+// classe da dare in base alla difficoltà
 let newClass;
 
+// messaggio utente in DOM
 const userMessage = document.querySelector('.message')
 
 // quando clicco play genero square
@@ -42,7 +35,6 @@ function gameMode() {
     contNum.className = '';
 
     // assegno il selettore alla difficoltà
-
     let difficulty = parseInt(selector.value);
 
     // difficoltà
@@ -93,7 +85,7 @@ function squareClick() {
         userArray.push(userNumber);
         
         if (userArray.length === numTry) {
-            
+             
             userMessage.innerHTML = 'Hai vinto, ma a quale prezzo?';
             contNum.classList.add('notclick');
         }
