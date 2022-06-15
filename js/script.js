@@ -10,7 +10,7 @@
 // ha cliccato su una cella che non era una bomba.
 
 const contNum = document.getElementById('container');
-console.log(contNum);
+
 
 const selector = document.getElementById('select');
 
@@ -76,34 +76,28 @@ function gameMode() {
 
 function squareClick() {
     let userNumber = parseInt(this.querySelector('span').innerHTML);
-    console.log(userNumber)
 
     // numero tentativi possibili
     const numTry = nNumbers - 16; 
 
     // se è incluso tra le bombe hai perso
     if (nades.includes(userNumber)) {
-
-        // seleziono tutti gli user number che corrispondono a nades
         
         this.classList.add('red');
-        nades.includes(userNumber)
         contNum.classList.add('notclick');
         userMessage.innerHTML = `Hai perso, il tuo punteggio è ${userArray.length}`
-        
-        // e se non è inserito tra le bombe lo inserisco nell'array del giocatore, sempre se non è già stato inserito
+
     } else if (!nades.includes(userNumber) && !userArray.includes(userNumber)) {
         
         this.classList.add('blue');
         userArray.push(userNumber);
         
-        // e se ho raggiunto il numero massimo di tentativi ho vinto
         if (userArray.length === numTry) {
+            
             userMessage.innerHTML = 'Hai vinto, ma a quale prezzo?';
             contNum.classList.add('notclick');
         }
     }
-    console.log(userArray)
 }
 
 //////////// funzioni //////////////////////////////////////////////
