@@ -4,8 +4,19 @@
     box-sizing: border-box;
 }
 
+img {
+    width: 50px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 main {
-    background-color: lightcyan;
+    background-color: #7fffd4;
     padding: 50px;
     display: flex;
     justify-content: center;
@@ -15,25 +26,24 @@ main {
 #container {
     width: 600px;
     height: 600px;
-    background-color: antiquewhite;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
 }
 
 .square {
-    background-color: lightpink;
+
     border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.square.green {
-    background-color: lightgreen;
+.square.blue {
+    background-color: #6495ed;
 }
 
 .square.red {
-    background-color: crimson;
+    background-color: #dc143c;
 }
 
 #container.easy > .square {
@@ -49,4 +59,8 @@ main {
 #container.hard > .square {
     width: calc(100% / 7);
     height: calc(100% / 7);
+}
+
+.notclick {
+    pointer-events: none;
 }

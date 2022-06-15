@@ -22,29 +22,24 @@ let nNumbers;
 // array dove andranno le bombe generate casualmente
 let nades = [];
 
-// genero i numeri nell'array (funzione)
-nades = nadesGenerator(nNumbers, nades);
+let userArray = [];
+
+let newSquare;
 
 let newClass;
-
-// numero tentativi possibili
-let numTry = nNumbers - 16; 
-
-console.log(numTry)
-
-let userArray = [];
 
 // quando clicco play genero square
 playBtn.addEventListener("click", gameMode);
 
-newSquare.addEventListener('click', gameOn);
-
 //////funzioni DOM/////////////////////////////////////////////////
 function gameMode() {
 
+    // reset ad ogni click
     contNum.innerHTML = '';
 
     contNum.className = '';
+
+    // assegno il selettore alla difficoltà
 
     let difficulty = parseInt(selector.value);
 
@@ -60,41 +55,53 @@ function gameMode() {
         newClass = 'hard';
     }
 
+    // genero numeri random
+    nades = nadesGenerator(nNumbers, nades);
+    console.log(nades)
+
+    // aggiungo la classe per specificare le dimensioni 
     contNum.classList.add(newClass);
 
     for(let i = 1; i <= nNumbers; i++) {
         newSquare = document.createElement('div');
         newSquare.innerHTML = `<span>${i}</span>`;
         newSquare.classList.add('square');
+        // rendo funzionale il tasto newSquare quindi
+        newSquare.addEventListener("click", squareClick);
         contNum.append(newSquare);
     }
 }
 
-function gameOn() {
-    let gameOver = true;
 
-    // ciclo fino a quando ho trovato tutti i tentativi oppure fino a quando non trovo un numero in nades
-    while (gameOver === true) {
-        newSquare.className= 'square green';
-        // se è incluso tra le bombe hai perso
-        if (nades.includes(userNumber)) {
-            gameOver = false;
-            newSquare.className= 'square red';
-            // e se non è inserito tra le bombe lo inserisco nell'array del giocatore, sempre se non è già stato inserito
-        } else if (!nades.includes(userNumber) && !userArray.includes(userNumber)) {
-            
-            userArray.push(userNumber);
-            // e se ho raggiunto il numero massimo di tentativi ha vinto
-            if (userArray.length === numTry) {
-                gameOver = false;
-                alert('Hai vinto!');
-            }
+function squareClick() {
+    let userNumber = parseInt(this.querySelector('span').innerHTML);
+    console.log(userNumber)
+
+    // numero tentativi possibili
+    const numTry = nNumbers - 16; 
+
+    // se è incluso tra le bombe hai perso
+    if (nades.includes(userNumber)) {
+
+        this.classList.add('red');
+        contNum.classList.add('notclick');
+        
+        // e se non è inserito tra le bombe lo inserisco nell'array del giocatore, sempre se non è già stato inserito
+    } else if (!nades.includes(userNumber) && !userArray.includes(userNumber)) {
+        
+        this.classList.add('blue');
+        userArray.push(userNumber);
+        
+        // e se ho raggiunto il numero massimo di tentativi ho vinto
+        if (userArray.length === numTry) {
+            alert('Hai vinto!');
         }
     }
+
     console.log(userArray)
 }
 
-// funzioni
+//////////// funzioni //////////////////////////////////////////////
 function nadesGenerator(number, Array) {
     while (Array.length !== 16) {
         let randomNum = Math.floor(Math.random() * number) + 1;
