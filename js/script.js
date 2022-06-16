@@ -12,7 +12,7 @@ let nNumbers;
 let nades = [];
 
 // array di ogni elemento cliccato
-let userArray = [];
+let userArray;
 
 // caselle
 let newSquare;
@@ -33,6 +33,8 @@ function gameMode() {
     contNum.innerHTML = '';
 
     contNum.className = '';
+
+    userArray = [];
 
     // assegno il selettore alla difficoltà
     let difficulty = parseInt(selector.value);
@@ -69,6 +71,8 @@ function gameMode() {
 function squareClick() {
     let userNumber = parseInt(this.querySelector('span').innerHTML);
 
+    userMessage.innerHTML = '';
+
     // numero tentativi possibili
     const numTry = nNumbers - 16; 
 
@@ -90,6 +94,7 @@ function squareClick() {
             contNum.classList.add('notclick');
         }
     }
+    console.log(userArray);
 }
 
 //////////// funzioni //////////////////////////////////////////////
